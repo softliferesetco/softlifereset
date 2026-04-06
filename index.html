@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soft Life Reset — Your Daily Sanctuary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --dp: #6B4FA0;
+  --p: #9B7FCC;
+  --lil: #C9B8E8;
+  --lav: #EDE6F7;
+  --mauve: #D4B8D8;
+  --td: #3D2B5E;
+  --tm: #7B6A8E;
+  --bg: #FAF8FF;
+  --bg2: #F3EEF9;
+  --card: #FFFFFF;
+  --border: rgba(155,127,204,0.2);
+  --border-strong: rgba(107,79,160,0.3);
+  --text: #3D2B5E;
+  --text-soft: #7B6A8E;
+  --text-hint: #A998BC;
+  --shadow: 0 2px 20px rgba(107,79,160,0.08);
+  --shadow-hover: 0 8px 32px rgba(107,79,160,0.16);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-pill: 999px;
+  --nav-w: 240px;
+  --header-h: 64px;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--lil); border-radius: 99px; }
+
+/* ── Layout ───────────────────────────────────────────────── */
+.app-shell { display: flex; min-height: 100vh; }
+
+/* ── Sidebar ──────────────────────────────────────────────── */
+.sidebar {
+  width: var(--nav-w);
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-logo {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.logo-mark {
+  width: 40px; height: 40px;
+  background: var(--dp);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.logo-mark svg { width: 20px; height: 20px; }
+.logo-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 600;
+  color: var(--td); line-height: 1.1;
+}
+.logo-tagline {
+  font-size: 11px; color: var(--tm);
+  letter-spacing: 0.06em; margin-top: 2px;
+}
+
+.sidebar-nav { padding: 16px 12px; flex: 1; }
+.nav-section-label {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-hint); padding: 0 12px;
+  margin: 16px 0 6px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 14px; font-weight: 400;
+  color: var(--tm);
+  transition: all 0.15s;
+  border: none; background: none; width: 100%;
+  text-align: left;
+}
+.nav-item:hover { background: var(--lav); color: var(--dp); }
+.nav-item.active { background: var(--lav); color: var(--dp); font-weight: 500; }
+.nav-item .nav-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  background: var(--bg2);
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.nav-item.active .nav-icon,
+.nav-item:hover .nav-icon { background: var(--lil); }
+
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--text-hint);
+  text-align: center;
+}
+
+/* ── Main Content ─────────────────────────────────────────── */
+.main {
+  margin-left: var(--nav-w);
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  height: var(--header-h);
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px;
+  position: sticky; top: 0; z-index: 50;
+}
+.topbar-left { display: flex; flex-direction: column; }
+.topbar-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 600;
+  color: var(--td); line-height: 1.1;
+}
+.topbar-date { font-size: 12px; color: var(--tm); margin-top: 1px; }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.topbar-streak {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--lav);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  font-size: 13px; font-weight: 500;
+  color: var(--dp);
+}
+
+.content { padding: 32px; flex: 1; max-width: 900px; }
+
+/* ── Sections ─────────────────────────────────────────────── */
+.section { display: none; animation: fadeIn 0.25s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.section-header { margin-bottom: 28px; }
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 600;
+  color: var(--td); line-height: 1;
+  margin-bottom: 6px;
+}
+.section-sub {
+  font-size: 14px; color: var(--tm);
+  font-style: italic;
+}
+
+/* ── Cards ────────────────────────────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-title {
+  font-size: 13px; font-weight: 600;
+  color: var(--dp);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 16px; }
+
+/* ── Stats ────────────────────────────────────────────────── */
+.stat-card {
+  background: var(--lav);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 600;
+  color: var(--dp); line-height: 1;
+}
+.stat-label { font-size: 12px; color: var(--tm); margin-top: 4px; letter-spacing: 0.05em; }
+
+/* ── Forms ────────────────────────────────────────────────── */
+.field { margin-bottom: 16px; }
+.field label {
+  display: block;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--tm); margin-bottom: 6px;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  width: 100%;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  resize: vertical;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--p);
+  box-shadow: 0 0 0 3px rgba(155,127,204,0.12);
+}
+textarea { min-height: 100px; line-height: 1.6; }
+
+.input-row { display: flex; gap: 10px; align-items: flex-end; }
+.input-row input { flex: 1; margin: 0; }
+
+/* ── Buttons ──────────────────────────────────────────────── */
+.btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px; font-weight: 500;
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  border: none; cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-primary { background: var(--dp); color: #fff; }
+.btn-primary:hover { background: var(--td); transform: translateY(-1px); }
+.btn-primary:active { transform: scale(0.97); }
+.btn-ghost {
+  background: transparent;
+  color: var(--p);
+  border: 1px solid var(--border-strong);
+}
+.btn-ghost:hover { background: var(--lav); }
+.btn-sm { font-size: 12px; padding: 7px 16px; }
+.btn-icon {
+  width: 36px; height: 36px; padding: 0;
+  border-radius: var(--radius-sm);
+  background: var(--bg2); color: var(--tm);
+  border: 1px solid var(--border);
+  font-size: 16px;
+}
+.btn-icon:hover { background: var(--lav); color: var(--dp); }
+
+.save-row { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+.saved-msg {
+  font-size: 12px; color: var(--p);
+  opacity: 0; transition: opacity 0.3s;
+  font-style: italic;
+}
+
+/* ── Energy Slider ────────────────────────────────────────── */
+.energy-wrap { display: flex; align-items: center; gap: 14px; }
+.energy-wrap span { font-size: 12px; color: var(--tm); white-space: nowrap; }
+input[type="range"] {
+  flex: 1; height: 6px;
+  -webkit-appearance: none;
+  background: var(--lav);
+  border-radius: 99px; outline: none; border: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--dp);
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 1px 6px rgba(107,79,160,0.3);
+}
+.energy-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 600;
+  color: var(--dp); min-width: 28px; text-align: center;
+}
+
+/* ── Mood Picker ──────────────────────────────────────────── */
+.mood-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.mood-btn {
+  flex: 1; min-width: 70px;
+  padding: 12px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.mood-btn:hover { border-color: var(--lil); background: var(--lav); }
+.mood-btn.active { border-color: var(--p); background: var(--lav); box-shadow: 0 0 0 3px rgba(155,127,204,0.12); }
+.mood-emoji { font-size: 24px; }
+.mood-label { font-size: 10px; color: var(--tm); font-weight: 500; letter-spacing: 0.04em; }
+
+/* ── Habit Tracker ────────────────────────────────────────── */
+.habit-table { width: 100%; border-collapse: separate; border-spacing: 0 6px; }
+.habit-table th {
+  font-size: 11px; font-weight: 600;
+  color: var(--tm); letter-spacing: 0.08em;
+  text-align: center; padding: 4px;
+}
+.habit-table th:first-child { text-align: left; padding-left: 0; }
+.habit-name-cell {
+  font-size: 14px; color: var(--text);
+  padding: 10px 12px 10px 0;
+  max-width: 160px; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap;
+}
+.habit-day-cell { text-align: center; padding: 4px; }
+.day-check {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 500;
+  transition: all 0.15s;
+  color: transparent;
+}
+.day-check:hover { border-color: var(--lil); background: var(--lav); }
+.day-check.done { background: var(--dp); border-color: var(--dp); color: white; }
+.day-check.today { box-shadow: 0 0 0 2px var(--p); }
+.habit-del {
+  background: none; border: none;
+  color: var(--text-hint); font-size: 16px;
+  cursor: pointer; padding: 4px 8px;
+  border-radius: 6px;
+  transition: color 0.15s;
+}
+.habit-del:hover { color: #c0392b; background: #fdf0f0; }
+
+/* ── Checklist ────────────────────────────────────────────── */
+.checklist { display: flex; flex-direction: column; gap: 8px; }
+.check-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.check-item:hover { background: var(--lav); border-color: var(--lil); }
+.check-item.done { background: var(--lav); border-color: var(--lil); }
+.check-box {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  border: 1.5px solid var(--lil);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600;
+  color: transparent;
+  transition: all 0.15s;
+}
+.check-item.done .check-box { background: var(--dp); border-color: var(--dp); color: #fff; }
+.check-text { font-size: 14px; color: var(--text); transition: color 0.15s; }
+.check-item.done .check-text { color: var(--tm); text-decoration: line-through; }
+
+/* ── Journal Prompt ───────────────────────────────────────── */
+.prompt-banner {
+  background: var(--td);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin-bottom: 20px;
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px;
+}
+.prompt-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-style: italic;
+  color: var(--lav); line-height: 1.5; flex: 1;
+}
+.btn-new-prompt {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--lil);
+  font-size: 12px; padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  cursor: pointer; white-space: nowrap;
+  font-family: 'Jost', sans-serif;
+  transition: all 0.15s;
+}
+.btn-new-prompt:hover { background: rgba(255,255,255,0.2); }
+
+/* ── Affirmation ──────────────────────────────────────────── */
+.affirmation-card {
+  background: linear-gradient(135deg, var(--td) 0%, var(--dp) 100%);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.affirmation-eyebrow {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--lil); margin-bottom: 12px;
+}
+.affirmation-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-style: italic;
+  color: #fff; line-height: 1.4;
+}
+
+/* ── Streak Dots ──────────────────────────────────────────── */
+.streak-dots { display: flex; gap: 5px; flex-wrap: wrap; }
+.streak-dot {
+  width: 14px; height: 14px;
+  border-radius: 4px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.streak-dot.done { background: var(--p); border-color: var(--p); }
+.streak-dot.today { box-shadow: 0 0 0 2px var(--dp); }
+
+/* ── History ──────────────────────────────────────────────── */
+.history-day-label {
+  font-size: 11px; font-weight: 600;
+  color: var(--tm); letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 24px 0 10px;
+}
+.history-entry {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin-bottom: 8px;
+}
+.history-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.history-type-badge {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--lav); color: var(--dp);
+}
+.history-body { font-size: 14px; color: var(--text); line-height: 1.6; }
+.history-grateful { font-size: 13px; color: var(--p); font-style: italic; margin-top: 6px; }
+
+/* ── Progress Bar ─────────────────────────────────────────── */
+.progress-bar-wrap { background: var(--bg2); border-radius: 99px; height: 8px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: var(--p); border-radius: 99px; transition: width 0.5s ease; }
+
+/* ── Pill ─────────────────────────────────────────────────── */
+.pill {
+  display: inline-block;
+  font-size: 11px; font-weight: 500;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--lav); color: var(--dp);
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+/* ── Empty State ──────────────────────────────────────────── */
+.empty-state {
+  text-align: center; padding: 40px 20px;
+  color: var(--text-hint); font-size: 14px;
+  font-style: italic; line-height: 1.6;
+}
+.empty-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.5; }
+
+/* ── Mobile hamburger ─────────────────────────────────────── */
+.hamburger {
+  display: none;
+  background: none; border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 40px; height: 40px;
+  cursor: pointer; align-items: center; justify-content: center;
+  flex-direction: column; gap: 5px;
+}
+.hamburger span { display: block; width: 18px; height: 2px; background: var(--tm); border-radius: 2px; }
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 90; }
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --nav-w: 260px; }
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.15); }
+  .main { margin-left: 0; }
+  .hamburger { display: flex; }
+  .overlay.show { display: block; }
+  .content { padding: 20px 16px; }
+  .topbar { padding: 0 16px; }
+  .card-grid { grid-template-columns: 1fr 1fr; }
+  .stat-num { font-size: 36px; }
+  .section-title { font-size: 28px; }
+}
+@media (max-width: 480px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .mood-row { gap: 5px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 2L11.8 7H17L12.6 10.2L14.4 15.2L10 12L5.6 15.2L7.4 10.2L3 7H8.2L10 2Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-name">Soft Life Reset</div>
+      <div class="logo-tagline">Your daily sanctuary</div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <button class="nav-item active" onclick="navigate('dashboard', this)">
+        <div class="nav-icon">🌸</div> Dashboard
+      </button>
+
+      <div class="nav-section-label">Daily tools</div>
+      <button class="nav-item" onclick="navigate('checkin', this)">
+        <div class="nav-icon">💜</div> Daily check-in
+      </button>
+      <button class="nav-item" onclick="navigate('habits', this)">
+        <div class="nav-icon">✨</div> Habit tracker
+      </button>
+      <button class="nav-item" onclick="navigate('journal', this)">
+        <div class="nav-icon">📝</div> Journal
+      </button>
+      <button class="nav-item" onclick="navigate('routines', this)">
+        <div class="nav-icon">🌅</div> Routines
+      </button>
+
+      <div class="nav-section-label">Reflect</div>
+      <button class="nav-item" onclick="navigate('history', this)">
+        <div class="nav-icon">🕊️</div> History
+      </button>
+      <button class="nav-item" onclick="navigate('planner', this)">
+        <div class="nav-icon">🗺️</div> Life planner
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      softlifereset.co<br>Made with love 💜
+    </div>
+  </aside>
+
+  <!-- ── Overlay for mobile ── -->
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <!-- ── Main ── -->
+  <div class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:14px">
+        <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="topbar-left">
+          <div class="topbar-title" id="page-title">Dashboard</div>
+          <div class="topbar-date" id="topbar-date"></div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-streak" id="header-streak">
+          <span>🔥</span> <span id="streak-count">0</span> day streak
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+
+      <!-- ══ DASHBOARD ══════════════════════════════════════ -->
+      <div class="section active" id="s-dashboard">
+        <div class="section-header">
+          <div class="section-title" id="greeting">Good morning, lovely</div>
+          <div class="section-sub">Here's your soft life at a glance</div>
+        </div>
+
+        <div class="affirmation-card">
+          <div class="affirmation-eyebrow">Today's affirmation</div>
+          <div class="affirmation-text" id="dash-affirmation">Loading...</div>
+        </div>
+
+        <div class="card-grid">
+          <div class="stat-card">
+            <div class="stat-num" id="stat-streak">0</div>
+            <div class="stat-label">Day streak</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="stat-checkins">0</div>
+            <div class="stat-label">Total check-ins</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" id="stat-habits">0%</div>
+            <div class="stat-label">This week's habit rate</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">30-day check-in history</div>
+          <div class="streak-dots" id="dash-streak-dots"></div>
+          <div style="font-size:11px;color:var(--text-hint);margin-top:10px">Purple = check-in completed that day</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">This week's habits</div>
+          <div id="dash-habits-preview"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Latest journal entry</div>
+          <div id="dash-journal-preview"></div>
+        </div>
+      </div>
+
+      <!-- ══ CHECK-IN ════════════════════════════════════════ -->
+      <div class="section" id="s-checkin">
+        <div class="section-header">
+          <div class="section-title">Daily check-in</div>
+          <div class="section-sub">A gentle pulse on how you're feeling today</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Energy level</div>
+          <div class="energy-wrap">
+            <span>Low energy</span>
+            <input type="range" min="1" max="10" value="5" step="1" id="energy-slider"
+              oninput="document.getElementById('energy-val').textContent=this.value">
+            <span>High energy</span>
+            <div class="energy-val" id="energy-val">5</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Mood check</div>
+          <div class="mood-row" id="mood-row">
+            <button class="mood-btn" data-mood="overwhelmed" onclick="selectMood(this)">
+              <div class="mood-emoji">😮‍💨</div><div class="mood-label">Overwhelmed</div>
+            </button>
+            <button class="mood-btn" data-mood="anxious" onclick="selectMood(this)">
+              <div class="mood-emoji">😟</div><div class="mood-label">Anxious</div>
+            </button>
+            <button class="mood-btn" data-mood="neutral" onclick="selectMood(this)">
+              <div class="mood-emoji">😐</div><div class="mood-label">Neutral</div>
+            </button>
+            <button class="mood-btn" data-mood="calm" onclick="selectMood(this)">
+              <div class="mood-emoji">😌</div><div class="mood-label">Calm</div>
+            </button>
+            <button class="mood-btn" data-mood="grateful" onclick="selectMood(this)">
+              <div class="mood-emoji">🥹</div><div class="mood-label">Grateful</div>
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Brain dump</div>
+          <div class="field">
+            <label>How are you feeling in your own words?</label>
+            <textarea id="ci-feeling" placeholder="Right now I feel..."></textarea>
+          </div>
+          <div class="field">
+            <label>What's on your mind?</label>
+            <textarea id="ci-mind" placeholder="No editing, no judgment — just let it out..."></textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Intentions</div>
+          <div class="field">
+            <label>What do I need today?</label>
+            <textarea id="ci-need" placeholder="Rest, connection, movement, quiet time..." style="min-height:70px"></textarea>
+          </div>
+          <div class="field">
+            <label>One thing I'm grateful for</label>
+            <input type="text" id="ci-grateful" placeholder="Today I'm grateful for...">
+          </div>
+          <div class="field">
+            <label>My affirmation</label>
+            <input type="text" id="ci-affirmation" placeholder="I am...">
+          </div>
+        </div>
+
+        <div class="save-row">
+          <button class="btn btn-primary" onclick="saveCheckin()">Save check-in</button>
+          <span class="saved-msg" id="ci-saved">✓ Saved for today</span>
+        </div>
+      </div>
+
+      <!-- ══ HABITS ══════════════════════════════════════════ -->
+      <div class="section" id="s-habits">
+        <div class="section-header">
+          <div class="section-title">Habit tracker</div>
+          <div class="section-sub">Build consistency with compassion, not pressure</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Add a habit</div>
+          <div class="input-row">
+            <input type="text" id="new-habit-input" placeholder="e.g. Morning pages, drink water, move body..." onkeydown="if(event.key==='Enter')addHabit()">
+            <button class="btn btn-primary btn-sm" onclick="addHabit()">+ Add</button>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap" id="habit-suggestions">
+            <span style="font-size:11px;color:var(--text-hint)">Suggestions:</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">This week</div>
+          <div id="habit-table-wrap"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Weekly reflection</div>
+          <textarea id="habit-reflection" placeholder="What I'm proud of this week... what felt hard... what I want to carry forward..."></textarea>
+          <div class="save-row">
+            <button class="btn btn-primary btn-sm" onclick="saveHabitReflection()">Save reflection</button>
+            <span class="saved-msg" id="habit-saved">✓ Saved</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ JOURNAL ══════════════════════════════════════════ -->
+      <div class="section" id="s-journal">
+        <div class="section-header">
+          <div class="section-title">Journal</div>
+          <div class="section-sub">A safe space to feel, process and reconnect</div>
+        </div>
+
+        <div class="prompt-banner">
+          <div class="prompt-text" id="journal-prompt">Loading prompt...</div>
+          <button class="btn-new-prompt" onclick="newPrompt()">New prompt ↺</button>
+        </div>
+
+        <div class="card">
+          <div class="field">
+            <label>Free write — today's entry</label>
+            <textarea id="journal-text" style="min-height:220px" placeholder="Write freely here..."></textarea>
+          </div>
+          <div class="save-row" style="justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:12px">
+              <button class="btn btn-primary btn-sm" onclick="saveJournal()">Save entry</button>
+              <span class="saved-msg" id="journal-saved">✓ Saved</span>
+            </div>
+            <span style="font-size:12px;color:var(--text-hint)" id="word-count">0 words</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ ROUTINES ════════════════════════════════════════ -->
+      <div class="section" id="s-routines">
+        <div class="section-header">
+          <div class="section-title">Routines</div>
+          <div class="section-sub">Anchor your day with gentle, intentional rituals</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🌅 Morning routine</div>
+          <div class="checklist" id="morning-list"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">🌙 Evening routine</div>
+          <div class="checklist" id="evening-list"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">🌿 Sunday reset</div>
+          <div class="checklist" id="sunday-list"></div>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary btn-sm" onclick="saveRoutines()">Save progress</button>
+          <button class="btn btn-ghost btn-sm" onclick="clearRoutines()">Reset for tomorrow</button>
+          <span class="saved-msg" id="routines-saved">✓ Saved</span>
+        </div>
+      </div>
+
+      <!-- ══ HISTORY ════════════════════════════════════════ -->
+      <div class="section" id="s-history">
+        <div class="section-header">
+          <div class="section-title">Your history</div>
+          <div class="section-sub">Every entry is proof you showed up for yourself</div>
+        </div>
+        <div id="history-container"></div>
+      </div>
+
+      <!-- ══ LIFE PLANNER ═══════════════════════════════════ -->
+      <div class="section" id="s-planner">
+        <div class="section-header">
+          <div class="section-title">Life planner</div>
+          <div class="section-sub">Map the life you actually want to live</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">My word for this season</div>
+          <div class="field">
+            <label>Choose one word to guide this chapter</label>
+            <input type="text" id="p-word" placeholder="e.g. bloom, peace, courage, flow...">
+          </div>
+          <div class="field">
+            <label>What this word means to me</label>
+            <textarea id="p-word-meaning" placeholder="This word represents..." style="min-height:70px"></textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">My life vision</div>
+          <div class="field">
+            <label>In one year, my life feels...</label>
+            <textarea id="p-vision" placeholder="Describe the life you're building..."></textarea>
+          </div>
+          <div class="field">
+            <label>I am most proud of...</label>
+            <textarea id="p-proud" placeholder="What achievements, big and small..." style="min-height:70px"></textarea>
+          </div>
+          <div class="field">
+            <label>I have let go of...</label>
+            <textarea id="p-letgo" placeholder="What no longer serves you..." style="min-height:70px"></textarea>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">My top 3 goals this month</div>
+          <div class="field"><label>Goal 1</label><input type="text" id="p-goal1" placeholder="What I want to achieve..."></div>
+          <div class="field"><label>Goal 2</label><input type="text" id="p-goal2" placeholder="What I want to achieve..."></div>
+          <div class="field"><label>Goal 3</label><input type="text" id="p-goal3" placeholder="What I want to achieve..."></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">My core values</div>
+          <div class="field">
+            <label>What matters most to me (write freely)</label>
+            <textarea id="p-values" placeholder="e.g. peace, family, growth, creativity, freedom..."></textarea>
+          </div>
+        </div>
+
+        <div class="save-row">
+          <button class="btn btn-primary" onclick="savePlanner()">Save planner</button>
+          <span class="saved-msg" id="planner-saved">✓ Saved</span>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app-shell -->
+
+<script>
+// ── Data ─────────────────────────────────────────────────────────
+const AFFIRMATIONS = [
+  "I am exactly where I need to be.",
+  "I choose peace over perfection.",
+  "I am worthy of the life I am building.",
+  "Small steps forward are still steps forward.",
+  "I release what no longer serves me.",
+  "I am allowed to rest and still be enough.",
+  "My softness is my strength.",
+  "I am becoming the woman I am meant to be.",
+  "Today I choose myself, gently.",
+  "I trust the process of my own becoming.",
+  "I am creating a life that feels good to live.",
+  "My progress is real, even when I can't see it.",
+  "I deserve the same kindness I give to others.",
+  "Every day I am growing into who I'm meant to be.",
+  "I am safe. I am enough. I am here.",
+];
+
+const PROMPTS = [
+  "What emotion have I been avoiding, and what might it be trying to tell me?",
+  "What would I tell my best friend if she felt the way I do right now?",
+  "What part of my life feels most aligned with who I truly am?",
+  "What do I need to forgive myself for today?",
+  "What small thing could I do today to feel 10% better?",
+  "What am I most proud of this week — even the tiny things?",
+  "What does my ideal peaceful day look like from start to finish?",
+  "What am I ready to let go of this month?",
+  "When do I feel most like myself? How can I create more of that?",
+  "What is my body trying to tell me right now?",
+  "What story am I telling myself that might not be true?",
+  "If I could give my current self one piece of advice, what would it be?",
+];
+
+const HABITS_SUGGESTED = ["Morning pages","Drink water","Move body","No phone first hour","Meditate","Journaling","Read 10 pages","Gratitude","Skincare","Early to bed"];
+
+const MORNING_ITEMS = [
+  "5 minutes of silence or meditation",
+  "Write 3 things I'm grateful for",
+  "Set my intention for the day",
+  "Drink a full glass of water",
+  "Stretch or light movement",
+  "Enjoy my coffee/tea without my phone",
+  "Speak my affirmation out loud",
+  "Step outside or open a window",
+];
+const EVENING_ITEMS = [
+  "Brain dump — write out what's on my mind",
+  "Choose 3 priorities for tomorrow",
+  "Close work and switch off notifications",
+  "Skincare ritual",
+  "Warm shower or bath",
+  "Herbal tea or calming drink",
+  "Read a physical book",
+  "Gratitude reflection before sleep",
+];
+const SUNDAY_ITEMS = [
+  "Brain dump everything on my mind",
+  "Tidy one area of my home",
+  "Plan the week ahead (loosely)",
+  "Choose my 3 priorities for the week",
+  "Prep one thing in advance",
+  "Self-care non-negotiable done",
+  "Reflect on last week's wins",
+  "Rest without guilt",
+];
+
+const PAGE_TITLES = {
+  dashboard: "Dashboard", checkin: "Daily check-in",
+  habits: "Habit tracker", journal: "Journal",
+  routines: "Routines", history: "History", planner: "Life planner"
+};
+
+// ── State ─────────────────────────────────────────────────────────
+const KEY = "slr_v2";
+let S = {
+  checkins: [], journals: [], habits: [],
+  habitChecks: {}, habitReflection: "",
+  routines: { morning: [], evening: [], sunday: [] },
+  planner: {}
+};
+
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) S = { ...S, ...JSON.parse(raw) };
+  } catch(e) {}
+}
+
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e) {}
+}
+
+// ── Helpers ───────────────────────────────────────────────────────
+function todayKey() { return new Date().toISOString().split("T")[0]; }
+function weekKey() {
+  const d = new Date(), s = new Date(d);
+  s.setDate(d.getDate() - d.getDay());
+  return s.toISOString().split("T")[0];
+}
+function flash(id) {
+  const el = document.getElementById(id);
+  el.style.opacity = "1";
+  setTimeout(() => el.style.opacity = "0", 2200);
+}
+function calcStreak() {
+  let s = 0, d = new Date();
+  while (true) {
+    const k = d.toISOString().split("T")[0];
+    if (S.checkins.some(c => c.date === k)) { s++; d.setDate(d.getDate() - 1); }
+    else break;
+  }
+  return s;
+}
+
+// ── Navigation ────────────────────────────────────────────────────
+function navigate(id, btn) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".nav-item").forEach(b => b.classList.remove("active"));
+  document.getElementById("s-" + id).classList.add("active");
+  if (btn) btn.classList.add("active");
+  document.getElementById("page-title").textContent = PAGE_TITLES[id] || id;
+  closeSidebar();
+  if (id === "dashboard") renderDashboard();
+  if (id === "habits") renderHabits();
+  if (id === "history") renderHistory();
+  if (id === "routines") renderRoutines();
+  if (id === "planner") loadPlanner();
+}
+
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("open");
+  document.getElementById("overlay").classList.toggle("show");
+}
+function closeSidebar() {
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("overlay").classList.remove("show");
+}
+
+// ── Check-in ──────────────────────────────────────────────────────
+function selectMood(btn) {
+  document.querySelectorAll(".mood-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+function saveCheckin() {
+  const entry = {
+    date: todayKey(),
+    energy: document.getElementById("energy-slider").value,
+    mood: document.querySelector(".mood-btn.active")?.dataset.mood || "",
+    feeling: document.getElementById("ci-feeling").value,
+    mind: document.getElementById("ci-mind").value,
+    need: document.getElementById("ci-need").value,
+    grateful: document.getElementById("ci-grateful").value,
+    affirmation: document.getElementById("ci-affirmation").value,
+    ts: Date.now()
+  };
+  S.checkins = S.checkins.filter(c => c.date !== entry.date);
+  S.checkins.unshift(entry);
+  save();
+  flash("ci-saved");
+  updateStreak();
+}
+
+// ── Habits ────────────────────────────────────────────────────────
+function addHabit() {
+  const inp = document.getElementById("new-habit-input");
+  const name = inp.value.trim();
+  if (!name) return;
+  S.habits.push({ id: Date.now(), name });
+  inp.value = "";
+  save();
+  renderHabits();
+}
+function addSuggestedHabit(name) {
+  if (S.habits.find(h => h.name === name)) return;
+  S.habits.push({ id: Date.now(), name });
+  save();
+  renderHabits();
+}
+function removeHabit(id) {
+  S.habits = S.habits.filter(h => h.id !== id);
+  save();
+  renderHabits();
+}
+function toggleHabitDay(hid, di) {
+  const wk = weekKey();
+  if (!S.habitChecks[wk]) S.habitChecks[wk] = {};
+  const k = `${hid}_${di}`;
+  S.habitChecks[wk][k] = !S.habitChecks[wk][k];
+  save();
+  renderHabits();
+  renderDashboard();
+}
+function saveHabitReflection() {
+  S.habitReflection = document.getElementById("habit-reflection").value;
+  save();
+  flash("habit-saved");
+}
+
+function renderHabits() {
+  const wk = weekKey(), checks = S.habitChecks[wk] || {};
+  const today = new Date().getDay();
+  const days = ["S","M","T","W","T","F","S"];
+  const wrap = document.getElementById("habit-table-wrap");
+
+  // Suggestions
+  const sugg = document.getElementById("habit-suggestions");
+  sugg.innerHTML = '<span style="font-size:11px;color:var(--text-hint)">Quick add:</span>' +
+    HABITS_SUGGESTED.filter(n => !S.habits.find(h => h.name === n)).slice(0,5)
+    .map(n => `<button onclick="addSuggestedHabit('${n}')" style="font-size:11px;padding:3px 10px;border-radius:99px;border:1px solid var(--border);background:var(--bg);color:var(--tm);cursor:pointer;font-family:'Jost',sans-serif;">${n}</button>`).join("");
+
+  if (S.habits.length === 0) {
+    wrap.innerHTML = '<div class="empty-state"><div class="empty-icon">✨</div>Add your first habit above to start tracking</div>';
+    return;
+  }
+
+  let html = `<table class="habit-table"><thead><tr>
+    <th style="text-align:left;padding-bottom:8px">Habit</th>
+    ${days.map((d,i) => `<th style="${i===today?'color:var(--dp)':''}">${d}</th>`).join("")}
+    <th></th>
+  </tr></thead><tbody>`;
+
+  S.habits.forEach(h => {
+    html += `<tr>
+      <td class="habit-name-cell" title="${h.name}">${h.name}</td>
+      ${days.map((_,i) => {
+        const done = checks[`${h.id}_${i}`];
+        return `<td class="habit-day-cell"><div class="day-check${done?' done':''}${i===today?' today':''}" onclick="toggleHabitDay(${h.id},${i})">${done?'✓':''}</div></td>`;
+      }).join("")}
+      <td><button class="habit-del" onclick="removeHabit(${h.id})" title="Remove">×</button></td>
+    </tr>`;
+  });
+  html += "</tbody></table>";
+
+  // Week progress
+  const total = S.habits.length * 7;
+  const done = Object.values(checks).filter(Boolean).length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  html += `<div style="margin-top:16px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+      <span style="font-size:12px;color:var(--text-hint)">Week completion</span>
+      <span style="font-size:12px;font-weight:500;color:var(--dp)">${pct}%</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+  </div>`;
+
+  wrap.innerHTML = html;
+  document.getElementById("habit-reflection").value = S.habitReflection || "";
+}
+
+// ── Journal ───────────────────────────────────────────────────────
+let promptIdx = 0;
+function newPrompt() {
+  promptIdx = (promptIdx + 1) % PROMPTS.length;
+  document.getElementById("journal-prompt").textContent = PROMPTS[promptIdx];
+}
+function saveJournal() {
+  const text = document.getElementById("journal-text").value.trim();
+  if (!text) return;
+  const entry = { date: todayKey(), prompt: PROMPTS[promptIdx], text, ts: Date.now() };
+  S.journals = S.journals.filter(j => j.date !== entry.date);
+  S.journals.unshift(entry);
+  save();
+  flash("journal-saved");
+}
+document.getElementById("journal-text").addEventListener("input", function() {
+  const w = this.value.trim().split(/\s+/).filter(Boolean).length;
+  document.getElementById("word-count").textContent = `${w} word${w!==1?"s":""}`;
+});
+
+// ── Routines ──────────────────────────────────────────────────────
+function toggleRoutine(type, idx) {
+  if (!S.routines[type]) S.routines[type] = [];
+  const i = S.routines[type].indexOf(idx);
+  if (i === -1) S.routines[type].push(idx);
+  else S.routines[type].splice(i, 1);
+  save();
+  renderRoutines();
+}
+function saveRoutines() { save(); flash("routines-saved"); }
+function clearRoutines() {
+  S.routines = { morning: [], evening: [], sunday: [] };
+  save();
+  renderRoutines();
+}
+function renderRoutines() {
+  const build = (items, type, containerId) => {
+    const done = S.routines[type] || [];
+    document.getElementById(containerId).innerHTML = items.map((item, i) =>
+      `<div class="check-item${done.includes(i)?" done":""}" onclick="toggleRoutine('${type}',${i})">
+        <div class="check-box">${done.includes(i)?"✓":""}</div>
+        <span class="check-text">${item}</span>
+      </div>`
+    ).join("");
+  };
+  build(MORNING_ITEMS, "morning", "morning-list");
+  build(EVENING_ITEMS, "evening", "evening-list");
+  build(SUNDAY_ITEMS, "sunday", "sunday-list");
+}
+
+// ── Life Planner ──────────────────────────────────────────────────
+function loadPlanner() {
+  const p = S.planner || {};
+  ["word","word-meaning","vision","proud","letgo","goal1","goal2","goal3","values"].forEach(k => {
+    const el = document.getElementById("p-" + k);
+    if (el) el.value = p[k] || "";
+  });
+}
+function savePlanner() {
+  S.planner = {};
+  ["word","word-meaning","vision","proud","letgo","goal1","goal2","goal3","values"].forEach(k => {
+    const el = document.getElementById("p-" + k);
+    if (el) S.planner[k] = el.value;
+  });
+  save();
+  flash("planner-saved");
+}
+
+// ── Dashboard ─────────────────────────────────────────────────────
+function renderDashboard() {
+  const streak = calcStreak();
+  document.getElementById("stat-streak").textContent = streak;
+  document.getElementById("stat-checkins").textContent = S.checkins.length;
+  document.getElementById("streak-count").textContent = streak;
+
+  const wk = weekKey(), checks = S.habitChecks[wk] || {};
+  const total = S.habits.length * 7;
+  const done = Object.values(checks).filter(Boolean).length;
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  document.getElementById("stat-habits").textContent = pct + "%";
+
+  // Affirmation
+  const day = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  document.getElementById("dash-affirmation").textContent = AFFIRMATIONS[day % AFFIRMATIONS.length];
+
+  // Greeting
+  const hr = new Date().getHours();
+  const greet = hr < 12 ? "Good morning" : hr < 17 ? "Good afternoon" : "Good evening";
+  document.getElementById("greeting").textContent = `${greet}, lovely`;
+
+  // 30-day dots
+  const dots = document.getElementById("dash-streak-dots");
+  const today = todayKey();
+  dots.innerHTML = Array.from({length: 30}, (_, i) => {
+    const d = new Date(); d.setDate(d.getDate() - 29 + i);
+    const k = d.toISOString().split("T")[0];
+    const isToday = k === today;
+    const hasCi = S.checkins.some(c => c.date === k);
+    return `<div class="streak-dot${hasCi?" done":""}${isToday?" today":""}" title="${k}"></div>`;
+  }).join("");
+
+  // Habits preview
+  const hp = document.getElementById("dash-habits-preview");
+  if (S.habits.length === 0) {
+    hp.innerHTML = '<div class="empty-state" style="padding:16px">Add habits in the Habit tracker to see progress here</div>';
+  } else {
+    hp.innerHTML = S.habits.slice(0,5).map(h => {
+      const d = Array.from({length:7},(_,i) => checks[`${h.id}_${i}`]?1:0).reduce((a,b)=>a+b,0);
+      const p = Math.round((d/7)*100);
+      return `<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <span style="font-size:13px;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h.name}</span>
+        <div style="width:100px"><div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${p}%"></div></div></div>
+        <span class="pill" style="min-width:44px;text-align:center">${d}/7</span>
+      </div>`;
+    }).join("");
+  }
+
+  // Journal preview
+  const jp = document.getElementById("dash-journal-preview");
+  if (S.journals.length === 0) {
+    jp.innerHTML = '<div class="empty-state" style="padding:16px">Your latest journal entry will appear here</div>';
+  } else {
+    const j = S.journals[0];
+    jp.innerHTML = `<div style="font-size:12px;color:var(--text-hint);margin-bottom:6px">${j.date}</div>
+      <div style="font-size:14px;color:var(--text);line-height:1.6">${j.text.substring(0,200)}${j.text.length>200?"...":""}</div>`;
+  }
+}
+
+// ── History ───────────────────────────────────────────────────────
+const MOOD_EMOJI = { overwhelmed:"😮‍💨", anxious:"😟", neutral:"😐", calm:"😌", grateful:"🥹" };
+
+function renderHistory() {
+  const container = document.getElementById("history-container");
+  const all = [
+    ...S.checkins.map(c => ({...c, type:"checkin"})),
+    ...S.journals.map(j => ({...j, type:"journal"}))
+  ].sort((a,b) => b.date.localeCompare(a.date));
+
+  if (all.length === 0) {
+    container.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">🕊️</div>
+      Your entries will appear here once you start checking in and journaling.<br>Every small act of showing up counts.
+    </div>`;
+    return;
+  }
+
+  const grouped = {};
+  all.forEach(e => { if (!grouped[e.date]) grouped[e.date] = []; grouped[e.date].push(e); });
+
+  container.innerHTML = Object.entries(grouped).map(([date, entries]) => {
+    const d = new Date(date + "T12:00:00");
+    const label = d.toLocaleDateString("en-ZA", { weekday:"long", day:"numeric", month:"long", year:"numeric" });
+    return `<div class="history-day-label">${label}</div>` +
+      entries.map(e => e.type === "checkin" ? `
+        <div class="history-entry">
+          <div class="history-meta">
+            <span style="font-size:22px">${MOOD_EMOJI[e.mood]||"💜"}</span>
+            <span class="history-type-badge">Check-in</span>
+            <span style="font-size:12px;color:var(--text-hint)">Energy ${e.energy}/10</span>
+          </div>
+          ${e.feeling ? `<div class="history-body">${e.feeling}</div>` : ""}
+          ${e.grateful ? `<div class="history-grateful">Grateful for: ${e.grateful}</div>` : ""}
+          ${e.affirmation ? `<div style="font-size:13px;color:var(--td);margin-top:6px;font-style:italic">"${e.affirmation}"</div>` : ""}
+        </div>` : `
+        <div class="history-entry">
+          <div class="history-meta">
+            <span style="font-size:22px">📝</span>
+            <span class="history-type-badge">Journal</span>
+          </div>
+          ${e.prompt ? `<div style="font-size:12px;color:var(--text-hint);font-style:italic;margin-bottom:6px">${e.prompt}</div>` : ""}
+          <div class="history-body">${e.text.substring(0,300)}${e.text.length>300?"...":""}</div>
+        </div>`
+      ).join("");
+  }).join("");
+}
+
+// ── Streak in header ──────────────────────────────────────────────
+function updateStreak() {
+  document.getElementById("streak-count").textContent = calcStreak();
+}
+
+// ── Init ──────────────────────────────────────────────────────────
+function init() {
+  load();
+  const now = new Date();
+  document.getElementById("topbar-date").textContent =
+    now.toLocaleDateString("en-ZA", { weekday:"long", day:"numeric", month:"long", year:"numeric" });
+
+  // Set today's prompt
+  const day = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+  promptIdx = day % PROMPTS.length;
+  document.getElementById("journal-prompt").textContent = PROMPTS[promptIdx];
+
+  renderDashboard();
+  renderHabits();
+  renderRoutines();
+  updateStreak();
+}
+
+init();
+</script>
+</body>
+</html>
